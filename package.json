@@ -1,0 +1,8 @@
+{
+  "name": "salintayo-admin",
+  "private": true,
+  "scripts": {
+    "start": "npx --yes serve . -l 5173",
+    "deploy:firestore": "npx --yes firebase-tools deploy --only firestore:rules"
+  }
+}

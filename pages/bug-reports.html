@@ -1,0 +1,32 @@
+<section id="section-bug-reports" class="admin-section admin-page admin-page--bug-reports" aria-labelledby="bug-reports-heading">
+  <header class="page-header">
+    <h1 id="bug-reports-heading">Bug reports</h1>
+    <p>Bug reports from the SalinTayo app Help Center (<code class="page-code">bugReports</code> collection, auto-generated document IDs). Deploy <code class="page-code">firestore.rules</code> from the learner project.</p>
+  </header>
+  <div class="toolbar toolbar--users">
+    <div class="admin-search">
+      <svg class="admin-search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="8" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </svg>
+      <input type="search" class="admin-input" id="bug-report-search" placeholder="Search email, type, or description…" autocomplete="off" />
+    </div>
+    <span class="page-meta" id="bug-reports-meta"></span>
+  </div>
+  <div class="panel panel__body--flush panel--raised">
+    <div class="table-wrap">
+      <table class="data-table" id="bug-reports-table">
+        <thead>
+          <tr>
+            <th>Submitted</th>
+            <th>User</th>
+            <th>Type</th>
+            <th>Platform</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody id="bug-reports-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>

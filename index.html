@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SalinTayo Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+  <div id="admin-app" class="admin-app">
+    <div class="admin-backdrop" id="sidebar-backdrop" aria-hidden="true"></div>
+
+    <aside class="admin-sidebar" aria-label="Main navigation">
+      <div class="admin-sidebar__brand">
+        <div class="admin-sidebar__brand-row">
+          <div class="admin-sidebar__logo" aria-hidden="true">S</div>
+          <div>
+            <h1 class="admin-sidebar__brand-title">SalinTayo</h1>
+            <p class="admin-sidebar__brand-sub">Admin Portal</p>
+          </div>
+        </div>
+      </div>
+      <nav class="admin-sidebar__nav" id="sidebar-nav">
+        <!-- Populated / bound in app.js -->
+        <button type="button" class="admin-nav__link is-active" data-section="dashboard"><span class="admin-nav__icon" aria-hidden="true">◆</span> Dashboard</button>
+        <button type="button" class="admin-nav__link" data-section="users"><span class="admin-nav__icon" aria-hidden="true">👤</span> Users</button>
+        <button type="button" class="admin-nav__link" data-section="bug-reports"><span class="admin-nav__icon" aria-hidden="true">🐛</span> Bug reports</button>
+        <button type="button" class="admin-nav__link" data-section="feedback"><span class="admin-nav__icon" aria-hidden="true">⭐</span> Feedback</button>
+      </nav>
+      <footer class="admin-sidebar__footer">Firestore: deploy <code style="font-size:11px">firestore.rules</code>, add <code style="font-size:11px">admins/{your UID}</code>, sign in with Firebase.</footer>
+    </aside>
+
+    <div class="admin-main-wrap">
+      <header class="admin-topbar">
+        <div class="admin-topbar__left">
+          <button type="button" class="admin-menu-toggle" id="menu-toggle" aria-label="Open menu">☰</button>
+          <div class="admin-topbar__title-block">
+            <h2 class="admin-topbar__title" id="page-title">Dashboard</h2>
+            <p class="admin-topbar__sub">SalinTayo · Admin Portal</p>
+          </div>
+        </div>
+        <div class="admin-topbar__right">
+          <span class="admin-status-pill" title="Connect Firebase or your API for live status">Demo · local session</span>
+          <div class="admin-user">
+            <div class="admin-user__avatar" id="admin-avatar" aria-hidden="true">A</div>
+            <div class="admin-user__meta">
+              <span id="admin-name">Admin User</span>
+              <span class="admin-user__role">Superadmin</span>
+            </div>
+          </div>
+          <button type="button" class="admin-btn--ghost" id="btn-logout">Log out</button>
+        </div>
+      </header>
+
+      <main class="admin-content" id="admin-pages-host">
+        <p class="admin-page-loading" id="page-load-status" style="margin:1rem;color:var(--color-text-muted)">Loading…</p>
+      </main>
+    </div>
+  </div>
+
+  <!-- Generic modal host -->
+  <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" id="modal-root">
+      <div class="modal__header">
+        <h2 id="modal-title">Modal</h2>
+        <button type="button" class="modal__close" id="modal-close" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal__body" id="modal-body"></div>
+      <div class="modal__footer" id="modal-footer"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" crossorigin="anonymous"></script>
+  <script src="js/pages-inline.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/dashboard-analytics.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/pages-loader.js"></script>
+</body>
+</html>

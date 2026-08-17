@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign in — SalinTayo Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body class="login-page">
+  <div class="login-shell">
+    <div class="login-bg" aria-hidden="true"></div>
+    <div class="login-grid" aria-hidden="true"></div>
+    <div class="login-orb login-orb--1" aria-hidden="true"></div>
+    <div class="login-orb login-orb--2" aria-hidden="true"></div>
+    <div class="login-particles" id="login-particles" aria-hidden="true"></div>
+
+    <div class="login-card">
+      <header class="login-card__head">
+        <h1 class="login-card__title">SalinTayo</h1>
+        <p class="login-card__sub">Admin sign in</p>
+      </header>
+
+      <div class="login-banner login-banner--warn" id="file-protocol-hint" role="alert" hidden>
+        This admin app cannot run from a double-clicked file (<code>file://</code>). Browsers block ES modules there.
+        In this folder run <code>npm start</code>, then open the URL shown (e.g. <code>http://localhost:5173/login.html</code>).
+      </div>
+      <div class="login-banner" id="login-banner" role="status" hidden></div>
+
+      <form id="login-form" class="login-form" method="post" action="login.html" autocomplete="on">
+        <div class="form-group login-input-wrap">
+          <label for="login-user">Email</label>
+          <svg class="login-input-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="1.5" aria-hidden="true">
+            <rect x="1" y="3" width="14" height="10" rx="2" />
+            <path d="M1 5l7 5 7-5" />
+          </svg>
+          <input class="admin-input" id="login-user" name="username" type="email" autocomplete="username" placeholder="admin@salintayo.com" required />
+        </div>
+        <div class="form-group login-input-wrap">
+          <label for="login-pass">Password</label>
+          <svg class="login-input-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="1.5" aria-hidden="true">
+            <rect x="2" y="7" width="12" height="8" rx="2" />
+            <path d="M5 7V5a3 3 0 0 1 6 0v2" />
+          </svg>
+          <input class="admin-input" id="login-pass" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required />
+        </div>
+        <p class="login-error" id="login-error" role="alert"></p>
+        <p class="login-help" id="login-help">
+          Sign in with a real Firebase <strong>Email/Password</strong> account from
+          <strong>Firebase Console → Authentication → Users</strong>. Local fallback login is disabled to prevent Firestore permission mismatches.
+        </p>
+        <button type="submit" class="admin-btn admin-btn--primary login-form__submit">Sign in</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      if (location.protocol === 'file:') {
+        var h = document.getElementById('file-protocol-hint');
+        if (h) h.hidden = false;
+      }
+    })();
+  </script>
+  <script src="js/data.js"></script>
+  <script>
+    (function () {
+      var a = window.SalintayoAdminData && window.SalintayoAdminData.ADMIN_AUTH;
+      var useFirebase = !a || a.useFirebaseAuth !== false;
+      var s = document.createElement('script');
+      if (useFirebase) {
+        s.type = 'module';
+        s.src = 'js/login-firebase.js';
+      } else {
+        s.src = 'js/login-local.js';
+      }
+      document.body.appendChild(s);
+    })();
+  </script>
+  <script>
+    (function () {
+      var container = document.getElementById('login-particles');
+      if (!container) return;
+      for (var i = 0; i < 18; i++) {
+        var p = document.createElement('div');
+        p.className = 'login-particle';
+        var size = Math.random() * 4 + 2;
+        p.style.width = size + 'px';
+        p.style.height = size + 'px';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.animationDuration = (Math.random() * 12 + 10) + 's';
+        p.style.animationDelay = '-' + (Math.random() * 22) + 's';
+        p.style.opacity = (Math.random() * 0.5 + 0.1).toString();
+        container.appendChild(p);
+      }
+    })();
+  </script>
+</body>
+</html>

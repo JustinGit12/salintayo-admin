@@ -1,0 +1,32 @@
+<section id="section-feedback" class="admin-section admin-page admin-page--feedback" aria-labelledby="feedback-heading">
+  <header class="page-header">
+    <h1 id="feedback-heading">Ratings &amp; feedback</h1>
+    <p>Ratings and comments from the app Help Center (<code class="page-code">appFeedback</code> collection, auto-generated document IDs).</p>
+  </header>
+  <div class="toolbar toolbar--users">
+    <div class="admin-search">
+      <svg class="admin-search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="8" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </svg>
+      <input type="search" class="admin-input" id="feedback-search" placeholder="Search email or comment…" autocomplete="off" />
+    </div>
+    <span class="page-meta" id="feedback-meta"></span>
+  </div>
+  <div class="panel panel__body--flush panel--raised">
+    <div class="table-wrap">
+      <table class="data-table" id="feedback-table">
+        <thead>
+          <tr>
+            <th>Submitted</th>
+            <th>User</th>
+            <th>Rating</th>
+            <th>Platform</th>
+            <th>Comment</th>
+          </tr>
+        </thead>
+        <tbody id="feedback-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>

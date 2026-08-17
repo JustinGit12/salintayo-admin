@@ -1,0 +1,84 @@
+rules_version = '2';
+// SalinTayo — deploy to the SAME Firebase project as js/firebase-client.js (firebase deploy --only firestore:rules).
+//
+// WHY "Missing or insufficient permissions": the admin UI runs getDocs() on whole collections.
+// Rules that only allow each user to read their own users/{uid} document do NOT allow that list query.
+//
+// Grant admin access using EITHER:
+//   (1) A marker document: Firestore → create collection `admins` → document ID = your Firebase Auth UID
+//       (empty map {} is fine). exists() in rules bypasses other rules for that path.
+//   (2) OR set custom claim admin=true on that user via Firebase Admin SDK (setCustomUserClaims).
+//
+// If you already deploy rules from salintayo-app (or elsewhere), do NOT replace that file blindly:
+// copy the isPanelAdmin / isBackendAdmin functions into your rules and add "|| isBackendAdmin()"
+// to the read/write conditions for users, chatSessions, dialects, and adminActivity.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    // Marker doc: admins/{request.auth.uid} — create manually in Firebase Console for each admin user.
+    function isPanelAdmin() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // Optional: Firebase Admin SDK — admin.auth().setCustomUserClaims(uid, { admin: true })
+    function isPanelAdminClaim() {
+      return signedIn() && request.auth.token.get('admin', false) == true;
+    }
+
+    function isBackendAdmin() {
+      return isPanelAdmin() || isPanelAdminClaim();
+    }
+
+    // Not readable by clients; marker docs are maintained in Console / Admin SDK only.
+    match /admins/{uid} {
+      allow read, write: if false;
+    }
+
+    // --- Learner profiles (admin tries users, userProfiles, profiles, Users in app-firestore.js) ---
+    match /users/{userId} {
+      allow read: if isBackendAdmin() || (signedIn() && request.auth.uid == userId);
+      allow create: if signedIn() && request.auth.uid == userId;
+      allow update, delete: if isBackendAdmin() || (signedIn() && request.auth.uid == userId);
+    }
+
+    match /userProfiles/{userId} {
+      allow read: if isBackendAdmin() || (signedIn() && request.auth.uid == userId);
+      allow create: if signedIn() && request.auth.uid == userId;
+      allow update, delete: if isBackendAdmin() || (signedIn() && request.auth.uid == userId);
+    }
+
+    match /profiles/{userId} {
+      allow read: if isBackendAdmin() || (signedIn() && request.auth.uid == userId);
+      allow write: if isBackendAdmin() || (signedIn() && request.auth.uid == userId);
+    }
+
+    match /Users/{userId} {
+      allow read: if isBackendAdmin() || (signedIn() && request.auth.uid == userId);
+      allow write: if isBackendAdmin() || (signedIn() && request.auth.uid == userId);
+    }
+
+    match /dialects/{docId} {
+      allow read: if true;
+      allow write: if isBackendAdmin();
+    }
+
+    match /chatSessions/{sessionId} {
+      allow read: if isBackendAdmin()
+        || (signedIn() && resource != null && resource.data.userId == request.auth.uid);
+      allow create: if signedIn() && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isBackendAdmin()
+        || (signedIn() && resource.data.userId == request.auth.uid);
+    }
+
+    match /adminActivity/{docId} {
+      allow read, create: if isBackendAdmin();
+      allow update, delete: if false;
+    }
+  }
+}

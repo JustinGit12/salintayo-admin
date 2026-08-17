@@ -1,0 +1,55 @@
+/**
+ * SalinTayo Admin — design tokens aligned with the main app
+ * (see salintayo-app: Login.css / Home.css — Poppins, blue / violet accents)
+ */
+:root {
+  --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Monaco, 'Cascadia Code', monospace;
+
+  /**
+   * Updated palette (aligned with the "Admin page for salin tayo (1)" styling).
+   * Keep legacy tokens for existing components/pages.
+   */
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f8fafc;
+  --color-background-tertiary: #f1f5f9;
+  --color-background-info: #eff6ff;
+
+  --color-border-primary: #e2e8f0;
+  --color-border-secondary: #cbd5e1;
+  --color-border-tertiary: #e2e8f0;
+  --color-border-info: #bfdbfe;
+
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-tertiary: #64748b;
+  --color-text-info: #1e40af;
+
+  --color-primary: #1d6ef7;
+  --color-primary-hover: #0b5fe8;
+  --color-accent: #7c3aed;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+
+  /* Legacy aliases */
+  --color-bg: var(--color-background-tertiary);
+  --color-surface: var(--color-background-primary);
+  --color-text: var(--color-text-primary);
+  --color-text-muted: var(--color-text-secondary);
+  --color-border: var(--color-border-primary);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  /* Cards / panels (reference admin UI) */
+  --radius-card: 14px;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 10px 15px -3px rgba(0, 0, 0, 0.06);
+
+  --sidebar-width: 220px;
+  --topbar-height: 64px;
+  --transition: 0.2s ease;
+}

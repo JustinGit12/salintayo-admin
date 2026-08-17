@@ -1,0 +1,28 @@
+<section id="section-users" class="admin-section admin-page admin-page--users" aria-labelledby="users-heading">
+  <header class="page-header">
+    <h1 id="users-heading">Users</h1>
+    <p>Rows load from Firestore learner profiles (<code class="page-code">users/{uid}</code> by default, or <code class="page-code">userProfiles</code> / others if <code class="page-code">users</code> is empty). <strong>Remove from directory</strong> soft-deletes the profile so it disappears here and from dashboard counts. Firebase Authentication is separate: deleting only in Auth can leave an orphan profile here; removing only here does not delete the sign-in account — use Firebase Console → Authentication for that (works on the Spark plan).</p>
+  </header>
+  <div class="toolbar toolbar--users">
+    <div class="admin-search">
+      <svg class="admin-search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="8" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </svg>
+      <input type="search" class="admin-input" id="user-search" placeholder="Search name or email…" autocomplete="off" />
+    </div>
+    <span class="page-meta" id="users-meta"></span>
+  </div>
+  <div class="panel panel__body--flush panel--raised">
+    <div class="table-wrap">
+      <table class="data-table data-table--users" id="users-table">
+        <thead>
+          <tr>
+            <th>Name</th><th>Email</th><th>Dialect</th><th>Status</th><th>Last active</th><th class="cell-actions">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="users-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
